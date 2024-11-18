@@ -1,7 +1,8 @@
 import type {Metadata} from "next";
 // import localFont from "next/font/local"
 import "./globals.css";
-import   React  from  "react";
+import React from "react";
+import 'easymde/dist/easymde.min.css'
 
 // const workSans = localFont(
 // {
