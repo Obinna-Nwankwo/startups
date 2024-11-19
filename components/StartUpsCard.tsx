@@ -20,7 +20,7 @@ const StartUpsCard = ({ post }: { post: StartUpsTypeCard }) => {
 
   return (
     <li
-      className={`ring-2 ring-slate-500 rounded-xl p-4 bg-slate-50 shadow-2xl hover:bg-primary`}
+      className={`ring-2 ring-slate-500 rounded-xl p-4 bg-slate-50 shadow-2xl hover:bg-yellow-100/60 hover:ring-4 hover:transition-shadow `}
     >
       <div className="flex justify-between">
         <p>{formatDate(_createdAt)}</p>
@@ -36,7 +36,7 @@ const StartUpsCard = ({ post }: { post: StartUpsTypeCard }) => {
             <p className="line-clamp-1 font-medium text-sm">{author?.name}</p>
           </Link>
           <Link href={`/startups/${_id}`}>
-            <h3 className="line-clamp-1 font-semibold text-lg">{title}</h3>
+            <h3 className="line-clamp-1 font-bold text-lg">{title}</h3>
           </Link>
         </div>
         <Link href={`/user/${author?._id}`}>

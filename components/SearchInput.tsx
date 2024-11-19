@@ -6,7 +6,6 @@ const SearchInput = ({ query }: { query?: string }) => {
   return (
     <form action={`/`} className={`search-form`}>
       <input
-        type="search"
         className={`search-input`}
         placeholder={`search for startups and more ......`}
         name={`query`}
