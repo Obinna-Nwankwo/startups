@@ -15,8 +15,7 @@
     @apply w-full  bg-primary  min-h-[500px] pattern flex justify-center items-center text-center mx-auto font-sans;
   }
 
-
-   .card_container {
+  .card_container {
     @apply grid md:grid-cols-3 sm:grid-cols-2 gap-5;
   }
 
@@ -25,9 +24,8 @@
   }
 
   .tag {
-    @apply bg-primary min-h-[500] pattern flex justify-center items-center
+    @apply bg-blue-50 font-semibold text-xl py-4 rounded-xl min-h-[500] max-w-xs flex mx-auto items-center justify-center;
   }
-
 
   /* search details */
   .search-form {
@@ -135,11 +133,11 @@
   }
 
   .view_text {
-    @apply font-medium text-sm bg-slate-900 px-4 py-2 rounded-lg capitalize;
+    @apply font-medium text-sm bg-blue-100 px-4 py-2 rounded-lg capitalize;
   }
 
   .category_tag {
-    @apply font-medium text-sm bg-slate-900 px-4 py-2 rounded-full;
+    @apply drop-shadow-lg border bg-yellow-200 font-medium text-sm px-4 py-2 rounded-full;
   }
 
   .pattern {

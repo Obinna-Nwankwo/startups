@@ -2,6 +2,7 @@ import SearchInput from "@/components/SearchInput";
 import StartUpsCard, { StartUpsTypeCard } from "@/components/StartUpsCard";
 import { STARTUPS_QUERIES } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+import { auth } from "@/auth";
 
 export default async function Home({
   searchParams,
@@ -15,6 +16,9 @@ export default async function Home({
     query: STARTUPS_QUERIES,
     params,
   });
+
+  const session = await auth();
+  console.log(session?.id)
 
   return (
     <>

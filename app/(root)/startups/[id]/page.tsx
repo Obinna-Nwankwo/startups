@@ -5,15 +5,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import markdownit from "markdown-it";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import View from "@/components/View";
+const md = markdownit();
+
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
   const post = await client.fetch(STARTUPS_ID_QUERIES, { id });
 
   if (!post) return notFound();
+  const parsedContent = md.render(post?.pitch || "");
 
   return (
     <>
-      <section className={`main_container !min-h-[230px]`}>
+      <section className={`main_container !min-h-[300px]`}>
         <div>
           <p className={`tag`}>{formatDate(post?._createdAt)} </p>
           <h1 className={`heading`}>{post.title} </h1>
@@ -21,7 +28,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
       </section>
 
-      <section className={`main_container`}>
+      <section className={`section_container`}>
         <div>
           <img
             src={post.image}
@@ -34,26 +41,47 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                 href={`/user/${post.author?._id}`}
                 className={`flex gap-2 items-center mb-3`}
               >
-                
-                  <img
+                <div className="rounded-full border-4 h-12 w-12 drop-shadow-lg overflow-hidden">
+                  <Image
                     src={post.author.image}
                     alt={"avatar"}
-                  width={20}
-                  height={60}
-                    className={`rounded-full drop-shadow-lg`}
+                    width={40}
+                    height={80}
+                    className={`w-full h-full`}
                   />
+                </div>
 
-                
-                    <p className="text-sm font-semibold">{post.author.name} </p>
-                    <p className="text-sm font-medium text-gray-500">
-                      @{post.author.username}
-                    </p>
-               
-                
-                
+                <div>
+                  <p className="text-sm font-semibold ">{post.author.name} </p>
+                  <p className="text-sm font-medium text-gray-500">
+                    @{post.author.username}
+                  </p>
+                </div>
               </Link>
+
+              <p
+                className={`category_tag `}
+              >
+                {post.category}
+              </p>
             </div>
+
+            <h3 className={`text-2xl font-bold`}>Pitch Details</h3>
+            {parsedContent ? (
+              <article
+                className={`prose max-w-4xl font-sans break-all`}
+                dangerouslySetInnerHTML={{ __html: parsedContent }}
+              />
+            ) : (
+              <p className={`search_no_result`}>No details provided</p>
+            )}
           </div>
+
+          <hr className={`divide-x-2 h-px bg-gray-800 my-8 rounded-full`} />
+
+          <Suspense fallback={<Skeleton className={`view_skeleton`} />}>
+            <View id={id} />
+          </Suspense>
         </div>
       </section>
     </>
